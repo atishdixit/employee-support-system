@@ -1,0 +1,11 @@
+<form class="chat-input" (ngSubmit)="submit()">
+  <input
+    type="text"
+    name="question"
+    [(ngModel)]="question"
+    [disabled]="disabled"
+    placeholder="e.g. How many paid leave days do I get?"
+    autocomplete="off"
+  />
+  <button type="submit" [disabled]="disabled || !question.trim()">Ask</button>
+</form>

@@ -1,0 +1,9 @@
+<div class="employee-selector">
+  <label for="employee-select">Acting as</label>
+  <select id="employee-select" [(ngModel)]="selectedEmployeeId" (ngModelChange)="onSelectionChange()">
+    @for (employee of employees; track employee.id) {
+      <option [value]="employee.id">{{ employee.name }} — {{ employee.designation }}</option>
+    }
+  </select>
+  <app-error-banner [message]="loadError" />
+</div>

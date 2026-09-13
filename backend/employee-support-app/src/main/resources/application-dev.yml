@@ -1,0 +1,5 @@
+# Local development: chattier logging, small/cheap token budget by default.
+logging:
+  level:
+    root: INFO
+    com.ext.emp.support: DEBUG

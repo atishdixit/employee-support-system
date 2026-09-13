@@ -1,0 +1,25 @@
+# Environment
+.env
+
+# Java / Maven
+backend/**/target/
+*.class
+
+# Node / Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# Logs
+backend/employee-support-app/logs/
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.iml
+.vscode/

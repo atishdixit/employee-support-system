@@ -1,0 +1,5 @@
+# Production: minimal console noise; rely on the rolling file appender (see log4j2.xml).
+logging:
+  level:
+    root: WARN
+    com.ext.emp.support: WARN

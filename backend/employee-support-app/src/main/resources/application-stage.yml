@@ -1,0 +1,5 @@
+# Staging: production-like logging verbosity, still points at a local/shared Ollama by default.
+logging:
+  level:
+    root: WARN
+    com.ext.emp.support: INFO

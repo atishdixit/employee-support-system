@@ -1,0 +1,9 @@
+# Automated/manual testing: smaller token budget for faster round-trips.
+app:
+  chat:
+    max-tokens: 150
+
+logging:
+  level:
+    root: INFO
+    com.ext.emp.support: INFO

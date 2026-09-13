@@ -1,0 +1,14 @@
+<div class="policy-chat">
+  <app-employee-selector (employeeChange)="onEmployeeChange($event)" />
+
+  <label class="debug-toggle">
+    <input type="checkbox" [(ngModel)]="debugMode" name="debugMode" />
+    Debug mode (verbose backend logging for this question)
+  </label>
+
+  <app-error-banner [message]="errorMessage" />
+
+  <app-chat-message-list [messages]="messages" [waitingForAnswer]="waitingForAnswer" />
+
+  <app-chat-input [disabled]="waitingForAnswer" (ask)="onAsk($event)" />
+</div>

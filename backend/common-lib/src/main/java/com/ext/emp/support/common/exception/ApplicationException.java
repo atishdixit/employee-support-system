@@ -1,0 +1,21 @@
+package com.ext.emp.support.common.exception;
+
+/** Base type for every application-specific runtime exception. */
+public class ApplicationException extends RuntimeException {
+
+    private final ErrorCode errorCode;
+
+    public ApplicationException(ErrorCode errorCode, String message) {
+        super(message);
+        this.errorCode = errorCode;
+    }
+
+    public ApplicationException(ErrorCode errorCode, String message, Throwable cause) {
+        super(message, cause);
+        this.errorCode = errorCode;
+    }
+
+    public ErrorCode getErrorCode() {
+        return errorCode;
+    }
+}

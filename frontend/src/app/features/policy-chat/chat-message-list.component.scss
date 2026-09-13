@@ -1,0 +1,16 @@
+.message-list {
+  min-height: 240px;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.empty-hint {
+  color: #6b7280;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 40px;
+}
