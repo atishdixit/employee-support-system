@@ -23,6 +23,11 @@ app:
     min-tokens: ${CHAT_MIN_TOKENS:20}
   cors:
     allowed-origin: ${UI_ORIGIN:http://localhost:4200}
+  security:
+    jwt:
+      # DEMO ONLY default - override with a real secret via .env in any shared environment.
+      secret: ${JWT_SECRET:demo-only-change-me-0123456789abcdef0123456789abcdef}
+      expiration-minutes: ${JWT_EXPIRATION_MINUTES:60}
 
 logging:
   config: classpath:log4j2.xml

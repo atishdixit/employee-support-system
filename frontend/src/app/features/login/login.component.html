@@ -1,0 +1,29 @@
+<div class="login-card">
+  <h2>Sign in</h2>
+
+  <form (ngSubmit)="submit()">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" [(ngModel)]="username" autocomplete="username" [disabled]="loading" />
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" [(ngModel)]="password" autocomplete="current-password" [disabled]="loading" />
+
+    <app-error-banner [message]="errorMessage" />
+
+    <button type="submit" [disabled]="loading || !username.trim() || !password.trim()">
+      {{ loading ? 'Signing in...' : 'Sign in' }}
+    </button>
+  </form>
+
+  <div class="demo-hint">
+    <p><strong>Demo accounts</strong> (all share the same password):</p>
+    <ul>
+      <li><code>e001</code></li>
+      <li><code>e002</code></li>
+      <li><code>e003</code></li>
+      <li><code>e004</code></li>
+      <li><code>e005</code></li>
+    </ul>
+    <p>Password: <code>Passw0rd!</code></p>
+  </div>
+</div>

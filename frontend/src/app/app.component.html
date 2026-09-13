@@ -4,5 +4,9 @@
 </header>
 
 <main>
-  <app-policy-chat />
+  @if (authService.employee()) {
+    <app-policy-chat />
+  } @else {
+    <app-login />
+  }
 </main>

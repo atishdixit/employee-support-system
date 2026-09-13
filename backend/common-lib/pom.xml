@@ -35,5 +35,20 @@
             <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!-- security/ package: generic JWT mechanics, reusable by any consumer that wants it.
+             Marked optional so a consumer that doesn't need auth isn't forced to pull Spring
+             Security or JJWT transitively - employee-support-app declares its own copies. -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.12.6</version>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 </project>

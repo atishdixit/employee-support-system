@@ -1,5 +1,10 @@
 <div class="policy-chat">
-  <app-employee-selector (employeeChange)="onEmployeeChange($event)" />
+  <div class="session-bar">
+    <span class="logged-in-as">
+      Logged in as <strong>{{ employee()?.name }}</strong> ({{ employee()?.designation }}, {{ employee()?.department }})
+    </span>
+    <button type="button" class="logout" (click)="logout()">Log out</button>
+  </div>
 
   <label class="debug-toggle">
     <input type="checkbox" [(ngModel)]="debugMode" name="debugMode" />

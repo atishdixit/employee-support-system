@@ -8,7 +8,6 @@ export type PolicyCategory =
   | 'OUT_OF_SCOPE';
 
 export interface PolicyChatRequest {
-  employeeId: string;
   question: string;
 }
 

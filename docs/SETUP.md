@@ -26,6 +26,32 @@ automatically) and `docker-compose` (via `env_file`) read the same file.
 | `API_PORT`               | `8080`                      | Backend port                                          |
 | `UI_PORT`                | `4200`                      | Frontend port                                         |
 | `UI_ORIGIN`              | `http://localhost:4200`    | Allowed CORS origin on the backend                    |
+| `JWT_SECRET`             | a demo value (see `.env.example`) | HMAC signing key, must be ≥32 characters; startup fails otherwise |
+| `JWT_EXPIRATION_MINUTES` | `60`                        | How long an issued token stays valid                   |
+
+## Demo logins
+
+There is no user database — `DemoUserService` hardcodes one login per seeded employee. All 5
+share the same password.
+
+| Username | Employee                                | Password     |
+|----------|-------------------------------------------|---------------|
+| `e001`   | Asha Verma (Senior Software Engineer)     | `Passw0rd!`   |
+| `e002`   | Rohan Mehta (Account Executive)           | `Passw0rd!`   |
+| `e003`   | Priya Nair (HR Business Partner)          | `Passw0rd!`   |
+| `e004`   | Karan Singh (Engineering Manager)         | `Passw0rd!`   |
+| `e005`   | Meera Iyer (Financial Analyst)            | `Passw0rd!`   |
+
+`POST /api/v1/auth/login` with `{"username": "...", "password": "..."}` returns a JWT; send it
+as `Authorization: Bearer <token>` on every other `/api/v1/**` call (the Angular app's
+`authInterceptor` does this automatically after login). These are demo-only, hardcoded, throwaway
+credentials — never reuse this pattern for real user accounts.
+
+## API docs (Swagger)
+
+`http://localhost:8080/swagger-ui/index.html` once the backend is running. Click **Authorize**
+and paste a JWT from `/api/v1/auth/login` to try out the protected endpoints directly from the
+UI. The raw OpenAPI document is at `/v3/api-docs`.
 
 ## Profiles
 

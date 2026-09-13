@@ -30,6 +30,11 @@ Docker.
 | .env + profiles (dev/test/stage/prod)          | `spring-dotenv` + `application-{profile}.yml`                          |
 | Docker support                                 | `infra/backend.Dockerfile`, `infra/frontend.Dockerfile`, `infra/docker-compose.yml` |
 | Angular, component-based, segregated layers    | `frontend/src/app/{core,features,shared}`                              |
+| Swagger / OpenAPI docs                         | `springdoc-openapi`, `OpenApiConfig` — `/swagger-ui/index.html`        |
+| JWT authentication                             | `SecurityConfig`, `JwtAuthenticationFilter` (app) + `JwtTokenProvider` (common-lib) |
+| 5 hardcoded demo users                         | `DemoUserService` — one login per seeded employee, BCrypt-hashed passwords |
+| Employee identity from the token, not the client | `PolicyChatController`/`EmployeeController` read `authentication.getName()`, not a client-supplied id |
+| High-level component diagram                   | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#high-level-component-diagram) |
 
 ## Quick start (Windows, one click)
 
@@ -45,7 +50,9 @@ run.bat
 ```
 
 Starts Ollama (if not already running), the Spring Boot backend on `http://localhost:8080`,
-and the Angular frontend on `http://localhost:4200`, then opens your browser.
+and the Angular frontend on `http://localhost:4200`, then opens your browser. Log in with any
+of the 5 demo accounts (`e001`-`e005`, password `Passw0rd!` — shown on the login screen too).
+API docs: `http://localhost:8080/swagger-ui/index.html`.
 
 ## Manual start
 
@@ -74,8 +81,9 @@ machine; only the backend and frontend run in containers).
 
 ```
 backend/
-  common-lib/                 Reusable jar: exceptions, correlation-id filter, Log4j2 wiring
+  common-lib/                 Reusable jar: exceptions, correlation-id filter, JWT mechanics
   employee-support-app/       The Spring Boot application (com.ext.emp.support)
+                               includes security/ (JWT filter, demo users, Spring Security config)
 frontend/                     Angular 18, standalone components
 infra/                        Dockerfiles + docker-compose.yml + nginx.conf
 docs/                         ARCHITECTURE.md, SETUP.md, INFRASTRUCTURE.md
