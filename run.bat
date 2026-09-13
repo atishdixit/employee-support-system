@@ -8,8 +8,8 @@ if not exist .env (
     copy .env.example .env >nul
 )
 
-for /f "usebackq tokens=1,2 delims==" %%A in (".env") do (
-    if not "%%A"=="" if not "%%A:~0,1%"=="#" set "%%A=%%B"
+for /f "usebackq eol=# tokens=1,2 delims==" %%A in (".env") do (
+    if not "%%A"=="" set "%%A=%%B"
 )
 
 if "%SPRING_PROFILES_ACTIVE%"=="" set SPRING_PROFILES_ACTIVE=dev
