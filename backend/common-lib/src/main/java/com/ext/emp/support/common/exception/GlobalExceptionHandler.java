@@ -6,8 +6,10 @@ import java.time.Instant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.ThreadContext;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -22,6 +24,17 @@ public class GlobalExceptionHandler {
         HttpStatus status = ex.getErrorCode().getHttpStatus();
         logger.warn("Handled {} -> {}: {}", ex.getErrorCode(), status.value(), ex.getMessage());
         return ResponseEntity.status(status).body(toErrorResponse(status, ex.getMessage(), request));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationFailure(MethodArgumentNotValidException ex, HttpServletRequest request) {
+        // Field @NotBlank/@NotNull messages in this codebase already name the field
+        // (e.g. "question must not be blank"), so join them as-is rather than double it up.
+        String message = ex.getBindingResult().getFieldErrors().stream()
+                .map(org.springframework.validation.FieldError::getDefaultMessage)
+                .collect(Collectors.joining("; "));
+        logger.warn("Validation failed for {}: {}", request.getRequestURI(), message);
+        return ResponseEntity.badRequest().body(toErrorResponse(HttpStatus.BAD_REQUEST, message, request));
     }
 
     @ExceptionHandler(Exception.class)
